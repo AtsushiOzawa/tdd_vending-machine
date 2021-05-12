@@ -35,7 +35,3 @@ class DrinkBox:
             {"name": drink.name, "amount": len(info["value"]), "price": info["price"]}
             for drink, info in self.container.items()
         ]
-
-    # TODO: drinkクラスのnameを日本語に変更 driver ozawa
-    # TODO: priceを自販機側に移動
-    # 宿題: 今のブランチをforkして、yamap55 をcollaborator に追加、yamap55にリポジトリを連絡 by ozawa

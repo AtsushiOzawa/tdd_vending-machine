@@ -14,7 +14,6 @@ class TestInfo:
             {
                 "name": "cola",
                 "amount": 5,
-                "price": 120,
             }
         ]
         assert actual == expected

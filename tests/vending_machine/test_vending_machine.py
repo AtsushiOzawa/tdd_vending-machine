@@ -22,7 +22,6 @@ class TestVendingMachine:
             {
                 "name": "cola",
                 "amount": 5,
-                "price": 120,
             }
         ]
 

@@ -1,9 +1,9 @@
 """飲み物の管理"""
 
 
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Type
 
-from vending_machine.drink import Cola
+from vending_machine.drink import Cola, Drink
 
 
 class DrinkBox:
@@ -15,7 +15,11 @@ class DrinkBox:
         """
         コンストラクタ
         """
-        self.container = {Cola: [Cola(), Cola(), Cola(), Cola(), Cola()]}
+        # TODO: Keyの型とValueの型が一致する事がわかるようなType Hintに変更する
+        # 例としてはKeyがColaでValueがWaterという事が許されてしまう
+        self.container: Dict[Type[Drink], List[Drink]] = {
+            Cola: [Cola(), Cola(), Cola(), Cola(), Cola()]
+        }
 
     def info(self) -> List[Dict[str, Any]]:
         """

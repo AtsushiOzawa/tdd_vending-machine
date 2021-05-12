@@ -15,7 +15,7 @@ class DrinkBox:
         """
         コンストラクタ
         """
-        self.container = {Cola: {"value": [Cola(), Cola(), Cola(), Cola(), Cola()]}}
+        self.container = {Cola: [Cola(), Cola(), Cola(), Cola(), Cola()]}
 
     def info(self) -> List[Dict[str, Any]]:
         """
@@ -27,6 +27,6 @@ class DrinkBox:
             管理している飲み物の情報
         """
         return [
-            {"name": drink.name, "amount": len(info["value"])}
-            for drink, info in self.container.items()
+            {"name": drink.name, "amount": len(drink_list)}
+            for drink, drink_list in self.container.items()
         ]

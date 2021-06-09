@@ -2,9 +2,9 @@
 飲み物の自動販売機
 """
 
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Type
 
-from vending_machine.drink import Cola
+from vending_machine.drink import Cola, Drink
 from vending_machine.drink_box import DrinkBox
 from vending_machine.money import Money
 
@@ -51,15 +51,15 @@ class VendingMachine:
         List[Dict[str, Any]]
             自販機のメニュー
         """
-        result = []
-        for drink, price in self.drink_price.items():
-            result.append(
-                {
-                    "drink": drink,
-                    "price": price,
-                    "soldout": not bool(self.drink_box.container[drink]),
-                }
-            )
+
+        def f(drink: Type[Drink], price: int) -> Dict[str, Any]:
+            return {
+                "drink": drink,
+                "price": price,
+                "soldout": not bool(self.drink_box.container[drink]),
+            }
+
+        result = [f(drink, price) for drink, price in self.drink_price.items()]
         return result
 
     def insert(self, *money_list: Money) -> None:

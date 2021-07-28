@@ -18,3 +18,11 @@ class TestInfo:
             }
         ]
         assert actual == expected
+
+    def test_get(self):
+        assert len(self.drink_box.container[Cola]) == 5
+
+        drink = self.drink_box.get(Cola)
+
+        assert isinstance(drink, Cola)
+        assert len(self.drink_box.container[Cola]) == 4

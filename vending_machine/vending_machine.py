@@ -28,7 +28,7 @@ class VendingMachine:
             Money.M_1000,
         )
         self.drink_box = DrinkBox()
-        self.drink_price:Dict[Type[Drink], int] = {Cola: 120}
+        self.drink_price: Dict[Type[Drink], int] = {Cola: 120}
 
     @property
     def total(self) -> int:

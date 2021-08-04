@@ -24,7 +24,7 @@ jobs:
       - name: Lint with flake8
         run: flake8
       - name: Lint with black
-        run: black --check **/*.py
+        run: black --check --diff --line-length=100 **/*.py
       - name: Use Node.js 14.x
         uses: actions/setup-node@v1
         with:

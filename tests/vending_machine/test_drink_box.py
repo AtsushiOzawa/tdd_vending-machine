@@ -29,12 +29,14 @@ class TestInfo:
 
 
 class TestContains:
-    @pytest.fixture(autouse=True)
-    def setup(self):
-        self.drink_box = DrinkBox()
+    def test_exists_drink(self):
+        drink_box = DrinkBox()
+        assert Cola in drink_box
 
-    def test_drink_full(self):
-        assert Cola in self.drink_box
+    def test_not_exists_drink(self):
+        drink_box = DrinkBox()
+        assert Tea not in drink_box
 
     def test_drink_empty(self):
-        assert not (Tea in self.drink_box)
+        drink_box = DrinkBox({Cola: []})
+        assert Cola not in drink_box

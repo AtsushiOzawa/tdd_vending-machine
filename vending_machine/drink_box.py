@@ -25,7 +25,7 @@ class DrinkBox:
         """
         指定された飲み物を保持しているかを判定する
 
-        ※0本（空のList）の場合でもTrueを返すことに注意する
+        ※0本（空のList）の場合はFalse返す
 
         Parameters
         ----------
@@ -37,7 +37,7 @@ class DrinkBox:
         bool
             保持しているかどうか
         """
-        return item in self.container
+        return (item in self.container) and bool(self.container[item])
 
     def info(self) -> List[Dict[str, Any]]:
         """
@@ -58,6 +58,8 @@ class DrinkBox:
         """
         飲み物を取り出す。
 
+        ※取り出すものがない場合には例外を投げる（inで確認の上使用する事を想定）
+
         Parameters
         ----------
         drink : Type[Drink]
@@ -68,6 +70,7 @@ class DrinkBox:
         Drink
             取り出した飲み物
         """
-        # TODO: 飲み物がKeyとして存在しない場合の処理を追加
-        # TODO: 飲み物の本数が0の場合の処理を追加
-        return self.container[drink].pop(0)
+        result = self.container[drink].pop(0)
+        if drink not in self.container:
+            del self.container[drink]
+        return result

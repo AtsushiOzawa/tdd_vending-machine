@@ -71,6 +71,6 @@ class DrinkBox:
             取り出した飲み物
         """
         result = self.container[drink].pop(0)
-        if drink not in self.container:
+        if not self.container[drink]:
             del self.container[drink]
         return result

@@ -37,4 +37,4 @@ class TestContains:
         assert Cola in self.drink_box
 
     def test_drink_empty(self):
-        assert not Tea in self.drink_box
+        assert not (Tea in self.drink_box)

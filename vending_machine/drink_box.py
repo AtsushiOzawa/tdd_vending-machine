@@ -21,6 +21,24 @@ class DrinkBox:
             Cola: [Cola(), Cola(), Cola(), Cola(), Cola()]
         }
 
+    def __contains__(self, item: Type[Drink]) -> bool:
+        """
+        指定された飲み物を保持しているかを判定する
+
+        ※0本（空のList）の場合でもTrueを返すことに注意する
+
+        Parameters
+        ----------
+        item : Type[Drink]
+            判定対象の飲み物
+
+        Returns
+        -------
+        bool
+            保持しているかどうか
+        """
+        return item in self.container
+
     def info(self) -> List[Dict[str, Any]]:
         """
         管理している飲み物の情報を返す。

@@ -15,7 +15,11 @@ class VendingMachine:
     飲み物の自動販売機
     """
 
-    def __init__(self, drink_box: Optional[DrinkBox] = None):
+    def __init__(
+        self,
+        drink_box: Optional[DrinkBox] = None,
+        drink_price: Optional[Dict[Type[Drink], int]] = None,
+    ):
         """
         初期処理
         """
@@ -28,7 +32,7 @@ class VendingMachine:
             Money.M_1000,
         )
         self.drink_box = DrinkBox() if drink_box is None else drink_box
-        self.drink_price: Dict[Type[Drink], int] = {Cola: 120}
+        self.drink_price: Dict[Type[Drink], int] = {} if drink_price is None else drink_price
 
     @property
     def total(self) -> int:

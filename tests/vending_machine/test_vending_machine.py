@@ -1,6 +1,6 @@
 import pytest
 
-from vending_machine.drink import Cola
+from vending_machine.drink import Cola, Drink, Tea
 from vending_machine.drink_box import DrinkBox
 from vending_machine.menu import Menu
 from vending_machine.money import Money
@@ -27,15 +27,30 @@ class TestVendingMachine:
 
 class TestMenu:
     def test_not_soldout(self):
-        vending_machine = VendingMachine(drink_box=DrinkBox({Cola: [Cola()]}))
+        # 在庫はあり販売している
+        drink_price = {Cola: 120}
+        drink_box = DrinkBox({Cola: [Cola()]})
+        vending_machine = VendingMachine(
+            drink_box=drink_box, drink_price=drink_price  # type: ignore
+        )
         actual = vending_machine.menu
         expected = [Menu(drink=Cola, price=120, soldout=False)]
         assert actual == expected
 
     def test_soldout(self):
-        vending_machine = VendingMachine(drink_box=DrinkBox())
+        # 在庫はないけど販売している
+        drink_price = {Cola: 120}
+        vending_machine = VendingMachine(drink_price=drink_price)  # type: ignore
         actual = vending_machine.menu
         expected = [Menu(drink=Cola, price=120, soldout=True)]
+        assert actual == expected
+
+    def test_not_setting_price(self):
+        # 在庫はあるけど販売していない（値段が付いていない）
+        drink_box = DrinkBox({Cola: [Cola()]})
+        vending_machine = VendingMachine(drink_box=drink_box, drink_price={})
+        actual = vending_machine.menu
+        expected = []
         assert actual == expected
 
 
@@ -101,7 +116,8 @@ class TestIsBuyDrink:
         飲み物が売っている、かつお金が足りている場合、購入可能
         """
         drink_box = DrinkBox({Cola: [Cola()]})
-        vending_machine = VendingMachine(drink_box=drink_box)
+        drink_price = {Cola: 120}
+        vending_machine = VendingMachine(drink_box=drink_box, drink_price=drink_price)  # type: ignore
         vending_machine.insert(Money.M_100, Money.M_10, Money.M_10)
         assert vending_machine.is_buy_drink(Cola)
 
@@ -110,7 +126,10 @@ class TestBuyDrink:
     @pytest.fixture(autouse=True)
     def setup(self):
         drink_box = DrinkBox({Cola: [Cola()]})
-        self.vending_machine = VendingMachine(drink_box=drink_box)
+        drink_price = {Cola: 120}
+        self.vending_machine = VendingMachine(
+            drink_box=drink_box, drink_price=drink_price  # type: ignore
+        )
 
     def test_buy_drink(self):
         self.vending_machine.insert(Money.M_100, Money.M_10, Money.M_10)

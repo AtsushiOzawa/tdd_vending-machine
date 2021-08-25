@@ -1,6 +1,6 @@
 import pytest
 
-from vending_machine.drink import Cola, Drink, Tea
+from vending_machine.drink import Cola
 from vending_machine.drink_box import DrinkBox
 from vending_machine.menu import Menu
 from vending_machine.money import Money
@@ -117,7 +117,9 @@ class TestIsBuyDrink:
         """
         drink_box = DrinkBox({Cola: [Cola()]})
         drink_price = {Cola: 120}
-        vending_machine = VendingMachine(drink_box=drink_box, drink_price=drink_price)  # type: ignore
+        vending_machine = VendingMachine(
+            drink_box=drink_box, drink_price=drink_price  # type: ignore
+        )
         vending_machine.insert(Money.M_100, Money.M_10, Money.M_10)
         assert vending_machine.is_buy_drink(Cola)
 

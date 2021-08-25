@@ -3,7 +3,7 @@
 
 from typing import Any, Dict, List, Optional, Type
 
-from vending_machine.drink import Cola, Drink
+from vending_machine.drink import Drink
 
 _container_type = Dict[Type[Drink], List[Drink]]
 

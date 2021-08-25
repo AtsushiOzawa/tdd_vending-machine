@@ -4,7 +4,7 @@
 
 from typing import Any, Dict, List, Optional, Type
 
-from vending_machine.drink import Cola, Drink
+from vending_machine.drink import Drink
 from vending_machine.drink_box import DrinkBox
 from vending_machine.menu import Menu
 from vending_machine.money import Money

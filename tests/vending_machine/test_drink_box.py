@@ -1,5 +1,3 @@
-import pytest
-
 from vending_machine.drink import Cola, Tea
 from vending_machine.drink_box import DrinkBox
 

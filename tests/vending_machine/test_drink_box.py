@@ -5,18 +5,30 @@ from vending_machine.drink_box import DrinkBox
 
 
 class TestInfo:
-    @pytest.fixture(autouse=True)
-    def setup(self):
-        self.drink_box = DrinkBox()
-
-    def test_normal(self):
-        actual = self.drink_box.info()
+    def test_exists(self):
+        drink_box = DrinkBox(
+            {
+                Cola: [Cola()],
+                Tea: [Tea(), Tea()],
+            }
+        )
+        actual = drink_box.info()
         expected = [
             {
                 "drink": Cola,
-                "amount": 5,
-            }
+                "amount": 1,
+            },
+            {
+                "drink": Tea,
+                "amount": 2,
+            },
         ]
+        assert actual == expected
+
+    def test_not_exists(self):
+        drink_box = DrinkBox({})
+        actual = drink_box.info()
+        expected = []
         assert actual == expected
 
 
@@ -37,7 +49,7 @@ class TestGet:
 
 class TestContains:
     def test_exists_drink(self):
-        drink_box = DrinkBox()
+        drink_box = DrinkBox({Cola: [Cola()]})
         assert Cola in drink_box
 
     def test_not_exists_drink(self):

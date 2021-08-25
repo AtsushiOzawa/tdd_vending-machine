@@ -20,7 +20,7 @@ class DrinkBox:
         # TODO: Keyの型とValueの型が一致する事がわかるようなType Hintに変更する
         # 例としてはKeyがColaでValueがWaterという事が許されてしまう
         if container is None:
-            self.container: _container_type = {Cola: [Cola(), Cola(), Cola(), Cola(), Cola()]}
+            self.container: _container_type = {}
         else:
             self.container = container
 

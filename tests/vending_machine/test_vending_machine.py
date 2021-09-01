@@ -138,7 +138,7 @@ class TestBuyDrink:
         actual = self.vending_machine.buy_drink(Cola)
         assert isinstance(actual, Cola)
         actual = self.vending_machine.get_inventory()
-        expected = [{"drink": Cola, "amount": 0}]
+        expected = []
         assert actual == expected
 
     def test_money_short(self):

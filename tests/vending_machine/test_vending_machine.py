@@ -137,7 +137,6 @@ class TestBuyDrink:
         self.vending_machine.insert(Money.M_100, Money.M_10, Money.M_10)
         actual = self.vending_machine.buy_drink(Cola)
         assert isinstance(actual, Cola)
-        self.vending_machine.get_inventory()
 
     def test_money_short(self):
         self.vending_machine.insert(Money.M_100, Money.M_10)

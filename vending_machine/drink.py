@@ -28,7 +28,7 @@ class Cola(Drink):
     コーラ
     """
 
-    name = "cola"
+    name: str = "cola"
 
 
 class Water(Drink):
@@ -36,7 +36,7 @@ class Water(Drink):
     水
     """
 
-    name = "水"
+    name: str = "水"
 
 
 class Tea(Drink):
@@ -44,4 +44,4 @@ class Tea(Drink):
     お茶
     """
 
-    name = "お茶"
+    name: str = "お茶"

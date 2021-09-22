@@ -134,7 +134,7 @@ class TestBuyDrink:
     class TestBuyDrinkCompleted:
         @pytest.fixture(autouse=True)
         def setup(self, vending_machine):
-            self.vending_machine = vending_machine  # .insert(Money.M_100, Money.M_10, Money.M_10)
+            self.vending_machine = vending_machine
             self.vending_machine.insert(Money.M_100, Money.M_10, Money.M_10)
             self.buy_drink = self.vending_machine.buy_drink(Cola)
 

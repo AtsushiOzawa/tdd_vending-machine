@@ -35,7 +35,7 @@ class VendingMachine:
         self.drink_price: Dict[Type[Drink], int] = {} if drink_price is None else drink_price
 
     @property
-    def total(self) -> int:
+    def amount(self) -> int:
         """
         投入金額を返す
 

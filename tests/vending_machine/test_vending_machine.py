@@ -60,13 +60,13 @@ class TestInsert:
         self.vending_machine = VendingMachine()
 
     @pytest.mark.parametrize(
-        "amount_list, expected_total", [([], 0), ([10], 10), ([10, 50, 100, 500, 1000], 1660)]
+        "amount_list, expected_amount", [([], 0), ([10], 10), ([10, 50, 100, 500, 1000], 1660)]
     )
-    def test_total(self, amount_list, expected_total):
+    def test_amount(self, amount_list, expected_amount):
         money_list = [Money(amount) for amount in amount_list]
 
         self.vending_machine.insert(*money_list)
-        assert self.vending_machine.total == expected_total
+        assert self.vending_machine.amount == expected_amount
 
     @pytest.mark.parametrize("money", [Money.M_1, Money.M_2000, Money.M_10000])
     def test_except_money(self, money):

@@ -125,26 +125,36 @@ class TestIsBuyDrink:
 
 
 class TestBuyDrink:
-    @pytest.fixture(autouse=True)
-    def setup(self):
+    @pytest.fixture()
+    def vending_machine(self):
         drink_box = DrinkBox({Cola: [Cola()]})
         drink_price = {Cola: 120}
-        self.vending_machine = VendingMachine(
-            drink_box=drink_box, drink_price=drink_price  # type: ignore
-        )
+        return VendingMachine(drink_box=drink_box, drink_price=drink_price)  # type: ignore
 
-    def test_buy_drink(self):
-        self.vending_machine.insert(Money.M_100, Money.M_10, Money.M_10)
-        actual = self.vending_machine.buy_drink(Cola)
-        assert isinstance(actual, Cola)
-        actual = self.vending_machine.get_inventory()
-        expected = []
-        assert actual == expected
+    class TestBuyDrinkCompleted:
+        @pytest.fixture(autouse=True)
+        def setup(self, vending_machine):
+            self.vending_machine = vending_machine  # .insert(Money.M_100, Money.M_10, Money.M_10)
+            self.vending_machine.insert(Money.M_100, Money.M_10, Money.M_10)
+            self.buy_drink = self.vending_machine.buy_drink(Cola)
 
-    def test_money_short(self):
-        self.vending_machine.insert(Money.M_100, Money.M_10)
-        with pytest.raises(ValueError) as excinfo:
-            self.vending_machine.buy_drink(Cola)
-        actual = str(excinfo.value)
-        expected = "Exception: short of money."
-        assert actual == expected
+        def test_buy_drink(self):
+            assert isinstance(self.buy_drink, Cola)
+
+        def test_inventroy(self):
+            actual = self.vending_machine.get_inventory()
+            expected = []
+            assert actual == expected
+
+    class TestBuyDrinkIncompleted:
+        @pytest.fixture(autouse=True)
+        def setup(self, vending_machine):
+            self.vending_machine = vending_machine
+
+        def test_money_short(self, vending_machine):
+            self.vending_machine.insert(Money.M_100, Money.M_10)
+            with pytest.raises(ValueError) as excinfo:
+                vending_machine.buy_drink(Cola)
+            actual = str(excinfo.value)
+            expected = "Exception: short of money."
+            assert actual == expected

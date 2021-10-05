@@ -148,7 +148,9 @@ class VendingMachine:
         """
         if self.is_buy_drink(drink):
             returned = self.drink_box.get(drink)
-            self.revenue += self.drink_price[drink]
+            drink_price = self.drink_price[drink]
+            self.revenue += drink_price
+            change = self.amount - drink_price
             self.money_box.clear()
-            return returned, 0
+            return returned, change
         raise ValueError("Exception: short of money.")

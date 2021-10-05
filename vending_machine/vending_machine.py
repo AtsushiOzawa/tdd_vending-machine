@@ -19,6 +19,7 @@ class VendingMachine:
         self,
         drink_box: Optional[DrinkBox] = None,
         drink_price: Optional[Dict[Type[Drink], int]] = None,
+        revenue: int = 0,
     ):
         """
         初期処理
@@ -33,6 +34,7 @@ class VendingMachine:
         )
         self.drink_box = DrinkBox() if drink_box is None else drink_box
         self.drink_price: Dict[Type[Drink], int] = {} if drink_price is None else drink_price
+        self.revenue = revenue
 
     @property
     def amount(self) -> int:

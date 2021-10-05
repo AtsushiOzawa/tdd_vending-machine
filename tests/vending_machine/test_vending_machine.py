@@ -156,6 +156,11 @@ class TestBuyDrink:
             expected = 120
             assert actual == expected
 
+        def test_empty_money_box(self):
+            actual = self.vending_machine.money_box
+            expected = []
+            assert actual == expected
+
     class TestBuyDrinkIncompleted:
         @pytest.fixture(autouse=True)
         def setup(self, vending_machine):

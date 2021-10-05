@@ -141,7 +141,7 @@ class TestBuyDrink:
         def setup(self, vending_machine):
             self.vending_machine = vending_machine
             self.vending_machine.insert(Money.M_100, Money.M_10, Money.M_10)
-            self.buy_drink = self.vending_machine.buy_drink(Cola)
+            self.buy_drink, self.change = self.vending_machine.buy_drink(Cola)
 
         def test_buy_drink(self):
             assert isinstance(self.buy_drink, Cola)
@@ -159,6 +159,11 @@ class TestBuyDrink:
         def test_empty_money_box(self):
             actual = self.vending_machine.money_box
             expected = []
+            assert actual == expected
+
+        def test_change(self):
+            actual = self.change
+            expected = 0
             assert actual == expected
 
     class TestBuyDrinkIncompleted:

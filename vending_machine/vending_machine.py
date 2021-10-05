@@ -2,7 +2,7 @@
 飲み物の自動販売機
 """
 
-from typing import Any, Dict, List, Optional, Type
+from typing import Any, Dict, List, Optional, Tuple, Type
 
 from vending_machine.drink import Drink
 from vending_machine.drink_box import DrinkBox
@@ -130,7 +130,7 @@ class VendingMachine:
             and sum(money.amount for money in self.money_box) >= self.drink_price[drink]
         )
 
-    def buy_drink(self, drink: Type[Drink]) -> Drink:
+    def buy_drink(self, drink: Type[Drink]) -> Tuple[Drink, int]:
         """
         指定した飲み物を購入する
 
@@ -143,10 +143,12 @@ class VendingMachine:
         -------
         Drink
             飲み物
+        int
+            お釣り
         """
         if self.is_buy_drink(drink):
             returned = self.drink_box.get(drink)
             self.revenue += self.drink_price[drink]
             self.money_box.clear()
-            return returned
+            return returned, 0
         raise ValueError("Exception: short of money.")

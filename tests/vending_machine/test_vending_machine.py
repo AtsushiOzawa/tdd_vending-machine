@@ -151,6 +151,11 @@ class TestBuyDrink:
             expected = []
             assert actual == expected
 
+        def test_revenue(self):
+            actual = self.vending_machine.revenue
+            expected = 120
+            assert actual == expected
+
     class TestBuyDrinkIncompleted:
         @pytest.fixture(autouse=True)
         def setup(self, vending_machine):

@@ -146,11 +146,12 @@ class VendingMachine:
         int
             お釣り
         """
-        if self.is_buy_drink(drink):
-            returned = self.drink_box.get(drink)
-            drink_price = self.drink_price[drink]
-            self.revenue += drink_price
-            change = self.amount - drink_price
-            self.money_box.clear()
-            return returned, change
-        raise ValueError("Exception: short of money.")
+        if not self.is_buy_drink(drink):
+            raise ValueError("Exception: short of money.")
+
+        returned = self.drink_box.get(drink)
+        drink_price = self.drink_price[drink]
+        self.revenue += drink_price
+        change = self.amount - drink_price
+        self.money_box.clear()
+        return returned, change

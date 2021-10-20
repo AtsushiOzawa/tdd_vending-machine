@@ -45,3 +45,11 @@ class Tea(Drink):
     """
 
     name: str = "お茶"
+
+
+class RedBull(Drink):
+    """
+    レッドブル
+    """
+
+    name: str = "red_bull"

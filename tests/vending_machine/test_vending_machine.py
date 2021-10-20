@@ -193,3 +193,17 @@ class TestGetIsBuyDrink:
         actual = vending_machine.get_is_buy_drink()
         expected = [Cola, RedBull]
         assert actual == expected
+
+    def test_short_money(self):
+        drink_box = DrinkBox({Cola: [Cola()], RedBull: [RedBull()]})
+        drink_price: Dict[Type[Drink], int] = {Cola: 120, RedBull: 200}
+        money_box: List[Money] = [Money.M_100, Money.M_10, Money.M_10]
+        vending_machine = VendingMachine(
+            drink_box=drink_box, drink_price=drink_price, money_box=money_box
+        )
+        actual = vending_machine.get_is_buy_drink()
+        expected = [Cola]
+        assert actual == expected
+
+    # 投入金額が足りていない飲み物が含まれていない事
+    # 在庫がない飲み物が含まれていない事

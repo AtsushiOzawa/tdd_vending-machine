@@ -1,6 +1,8 @@
+from typing import Dict, List, Type
+
 import pytest
 
-from vending_machine.drink import Cola
+from vending_machine.drink import Cola, Drink, RedBull
 from vending_machine.drink_box import DrinkBox
 from vending_machine.menu import Menu
 from vending_machine.money import Money
@@ -178,3 +180,16 @@ class TestBuyDrink:
             actual = str(excinfo.value)
             expected = "Exception: short of money."
             assert actual == expected
+
+
+class TestGetIsBuyDrink:
+    def test_normal(self):
+        drink_box = DrinkBox({Cola: [Cola()], RedBull: [RedBull()]})
+        drink_price: Dict[Type[Drink], int] = {Cola: 120, RedBull: 200}
+        money_box: List[Money] = [Money.M_1000]
+        vending_machine = VendingMachine(
+            drink_box=drink_box, drink_price=drink_price, money_box=money_box
+        )
+        actual = vending_machine.get_is_buy_drink()
+        expected = [Cola, RedBull]
+        assert actual == expected

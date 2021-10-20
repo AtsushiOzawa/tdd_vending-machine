@@ -156,3 +156,16 @@ class VendingMachine:
         change = self.amount - drink_price
         self.money_box.clear()
         return returned, change
+
+    def get_is_buy_drink(self) -> List[Type[Drink]]:
+        """
+        購入可能な飲み物を返す
+
+        ※投入金額、在庫を考慮する
+
+        Returns
+        -------
+        List[Type[Drink]]
+            購入可能な飲み物
+        """
+        return [drink for drink, _ in self.drink_price.items() if self.is_buy_drink(drink)]

@@ -10,6 +10,9 @@ from vending_machine.vending_machine import VendingMachine
 
 
 def main():
+    """
+    Buying demonstration.
+    """
     drink_price: Dict[Type[Drink], int] = {Cola: 120, RedBull: 200}
     drink_box = DrinkBox(
         {Cola: [Cola(), Cola(), Cola()], RedBull: [RedBull(), RedBull(), RedBull()]}

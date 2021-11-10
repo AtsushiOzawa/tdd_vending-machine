@@ -1,14 +1,16 @@
 """
 Main
 """
-from vending_machine.drink import Cola, RedBull
+from typing import Dict, Type
+
+from vending_machine.drink import Cola, Drink, RedBull
 from vending_machine.drink_box import DrinkBox
 from vending_machine.money import Money
 from vending_machine.vending_machine import VendingMachine
 
 
 def main():
-    drink_price = {Cola: 120, RedBull: 200}
+    drink_price: Dict[Type[Drink], int] = {Cola: 120, RedBull: 200}
     drink_box = DrinkBox(
         {Cola: [Cola(), Cola(), Cola()], RedBull: [RedBull(), RedBull(), RedBull()]}
     )

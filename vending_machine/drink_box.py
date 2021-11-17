@@ -1,11 +1,12 @@
 """飲み物の管理"""
 
 
-from typing import Any, Dict, List, Optional, Type
+from typing import Any, Dict, List, Optional, Type, TypeVar
 
 from vending_machine.drink import Drink
 
-_container_type = Dict[Type[Drink], List[Drink]]
+T = TypeVar("T", bound=Drink)
+_container_type = Dict[Type[T], List[T]]
 
 
 class DrinkBox:
@@ -13,14 +14,14 @@ class DrinkBox:
     飲み物の管理
     """
 
-    def __init__(self, container: Optional[_container_type] = None):
+    def __init__(self, container: Optional[Dict[Type[T], List[T]]] = None):
         """
         コンストラクタ
         """
         # TODO: Keyの型とValueの型が一致する事がわかるようなType Hintに変更する
         # 例としてはKeyがColaでValueがWaterという事が許されてしまう
         if container is None:
-            self.container: _container_type = {}
+            self.container: Dict[Type[T], List[T]] = {}
         else:
             self.container = container
 
@@ -32,7 +33,7 @@ class DrinkBox:
 
         Parameters
         ----------
-        item : Type[Drink]
+        item : Type[T]
             判定対象の飲み物
 
         Returns
@@ -56,7 +57,9 @@ class DrinkBox:
             for drink, drink_list in self.container.items()
         ]
 
-    def get(self, drink: Type[Drink]) -> Drink:
+    T2 = TypeVar("T", bound=Drink)
+
+    def get(self, drink: Type[T2]) -> T2:
         # TODO: 入出力の型が一致するようにType Hintを設定する
         """
         飲み物を取り出す。
